@@ -1,0 +1,8 @@
+DROP DATABASE IF EXISTS rolodex;
+CREATE DATABASE rolodex;
+
+CREATE TABLE rolodex.contacts (
+	id INT NOT NULL AUTO_INCREMENT,
+    contact_info json DEFAULT NULL,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
