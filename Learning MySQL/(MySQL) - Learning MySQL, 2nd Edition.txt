@@ -1,0 +1,2 @@
+there are 16 chapters
+https://github.com/learning-mysql-2nd/learning-mysql-2nd

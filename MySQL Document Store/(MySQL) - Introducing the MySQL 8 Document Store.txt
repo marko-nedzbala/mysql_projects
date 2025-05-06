@@ -1,0 +1,63 @@
+https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04
+
+
+there are 10 chapters
+
+Chapter01
+Introducing MySQL 8 - A New Beginning
+
+My-S-Q-L (if they ask in an interview)
+
+GA (Generally Available) release of the server
+
+JSON
+Schema: database
+Collection: table
+
+Accessing MySQL
+$ sudo mysql -u root -p
+
+MySQL Shell is not the command prompt
+$ mysqlsh
+$ mysqlsh -u root --python --json=pretty
+
+mysql> \use database
+mysql> colls = db.get_collection('coll_name')
+
+MySQL protocol and API to work with JSON documents
+1.) X Plugin: is a plugin that enables the X Protocol
+2.) X Protocol: designed to communicate with the server using X DevAPI
+3.) X DevAPI: API to allow develop NoSQL solutions for MySQL and use MySQL as a document store
+
+InnoDB
+storage engine: a mechanism to store data in various ways
+
+Data Dictionary
+gives information about the database structure
+
+Group Replication
+Group Replication allows high availability database solutions
+built upon:
+1.) Group membership: manages whether servers are active/online and participating in the group, ensures every server in the group has a consistent view of the membership set, every server knows the complete list of servers in the group
+2.) Failure detection: mechanism that is able to find and report which server are offline/unreachable and assumed to bed dead, allows the servers in the group to test the condition of the presumed dead server
+3.) Fault tolerance: uses an implementation of the Paxos distributed algorithm to provide distributed coordination among the servers, fault tolerance is n = 2f + 1, n = number of servers need to tolerate f = failures, so to tolerate 5 servers failing, you need 11 servers in the group 
+
+InnoDB Cluster
+AdminAPI is a special API available via the MySQL shell
+
+// creates an instance running on port 3307
+mysql> dba.deploy_sandbox_instance(3307)
+// connect to the first instance
+mysql> \connect root@localhost:3307
+// create the cluster
+mysql> my_cluster = dba.create_cluster('my_cluster')
+// get the cluster
+mysql> my_cluster = dba.get_cluster('my_cluster')
+// add instances to said cluster
+mysql> my_cluster.add_instance('root@localhost:3308')
+
+// get the status of the cluster
+mysql> my_cluster.status()
+
+// connect with the cluster, use MySQL Router to manage the connections
+$ mysqlrouter --bootstrap localhost:3307 --user=marko
